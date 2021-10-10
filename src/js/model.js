@@ -23,6 +23,6 @@ export async function loadRecipe(id) {
       ingredients: recipe.ingredients,
     });
   } catch (err) {
-    console.error('The request took to long! Timeout after 5second 🐌');
+    throw err;
   }
 }
