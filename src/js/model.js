@@ -12,7 +12,7 @@ export async function loadRecipe(id) {
 
     // reformating the obj we got from the server
     const { recipe } = data.data;
-    state.recipe = {
+    return (state.recipe = {
       id: recipe.id,
       title: recipe.title,
       publisher: recipe.publisher,
@@ -21,8 +21,7 @@ export async function loadRecipe(id) {
       servings: recipe.servings,
       cookingTime: recipe.cooking_time,
       ingredients: recipe.ingredients,
-    };
-    console.log(state.recipe);
+    });
   } catch (err) {
     console.error('The request took to long! Timeout after 5second 🐌');
   }
