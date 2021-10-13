@@ -7,9 +7,6 @@ import { async } from 'regenerator-runtime';
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 ///////////////////////////////////////
-// if (module.hot) {
-//   module.hot.accept();
-// }
 
 async function recipesController() {
   try {
@@ -28,16 +25,16 @@ async function recipesController() {
 
 async function searchController() {
   try {
-    resultsView.renderSpinner();
-
     const query = searchView.getQuery();
     if (!query) return;
 
+    resultsView.renderSpinner();
     await model.loadSearchResults(query);
 
     resultsView.render(model.state.search.results);
   } catch (err) {
     recipeView.renderError();
+    console.log(err);
   }
 }
 

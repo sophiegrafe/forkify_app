@@ -1,15 +1,17 @@
 import icons from 'url:../../img/icons.svg';
 
 export default class View {
-  //#region Fields
+  //#region fields
   _data;
   //#endregion
 
-  //#region Methods
+  //#region methods
+  //protected
   _clear() {
     this._parentElement.innerHTML = '';
   }
 
+  //public
   render(data) {
     if (!data || (Array.isArray(data) && data.length === 0))
       return this.renderError();

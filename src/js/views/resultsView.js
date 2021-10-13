@@ -1,12 +1,15 @@
 import View from './View';
-import { icons } from 'url:../../img/icons.svg';
 
 class ResultsView extends View {
+  //#region fields
   _parentElement = document.querySelector('.results');
   _errorMessage =
     'We could not found recipes for your query! Please try again.';
   _notification = '';
+  //#endregion
 
+  //#region methods
+  // protected
   _generateHTML() {
     return this._data.map(prev => this._generateHTMLPreview(prev)).join('');
   }
@@ -26,6 +29,7 @@ class ResultsView extends View {
     </li>
     `;
   }
+  //#endregion
 }
 
 export default new ResultsView();

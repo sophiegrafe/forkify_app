@@ -19,7 +19,6 @@ export async function getJSON(url) {
     if (!response.ok) throw new Error(`${data.message} (${response.status})`);
     return data;
   } catch (err) {
-    // rethrowing the error in the catch block so we propagate it from one async function to an other asyn fct
     throw err;
   }
 }

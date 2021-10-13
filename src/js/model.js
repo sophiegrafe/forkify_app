@@ -45,7 +45,6 @@ export async function loadSearchResults(query) {
       };
     });
   } catch (err) {
-    console.error(`${err.message}`);
     throw err;
   }
 }
