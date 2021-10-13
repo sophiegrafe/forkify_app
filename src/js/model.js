@@ -13,8 +13,7 @@ export const state = {
 
 export async function loadRecipe(id) {
   try {
-    const data = await getJSON(`${API_URL}get?rId=${id}`);
-
+    const data = await getJSON(`${API_URL}${id}`);
     // reformating the obj we got from the server
     const { recipe } = data.data;
     return (state.recipe = {
@@ -35,11 +34,11 @@ export async function loadRecipe(id) {
 export async function loadSearchResults(query) {
   try {
     state.search.query = query;
-    const data = await getJSON(`${API_URL}search?q=${query}`);
+    const data = await getJSON(`${API_URL}?search=${query}`);
 
-    state.search.results = data.recipes.map(recipe => {
+    state.search.results = data.data.recipes.map(recipe => {
       return {
-        id: recipe.recipe_id,
+        id: recipe.id,
         title: recipe.title,
         publisher: recipe.publisher,
         image: recipe.image_url,
