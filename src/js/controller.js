@@ -2,8 +2,8 @@ import * as model from './model.js';
 import recipeView from './views/recipeView.js';
 import searchView from './views/searchView.js';
 import resultsView from './views/resultsView.js';
+import paginationView from './views/paginationView.js';
 
-import { async } from 'regenerator-runtime';
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 ///////////////////////////////////////
@@ -31,15 +31,22 @@ async function searchController() {
     resultsView.renderSpinner();
     await model.loadSearchResults(query);
 
-    resultsView.render(model.state.search.results);
+    resultsView.render(model.getSearchResultsPage());
+    paginationView.render(model.state.search);
   } catch (err) {
     recipeView.renderError();
     console.log(err);
   }
 }
 
-function initSubscribers() {
+function paginationController(goToPage) {
+  resultsView.render(model.getSearchResultsPage(goToPage));
+  paginationView.render(model.state.search);
+}
+
+//initializing subscribers with IIFE
+(function () {
   recipeView.addHandlerRender(recipesController);
   searchView.addHandlerSearch(searchController);
-}
-initSubscribers();
+  paginationView.addHandlerClickBtn(paginationController);
+})();
