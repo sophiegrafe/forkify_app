@@ -12,8 +12,10 @@ async function recipesController() {
   try {
     const id = window.location.hash.slice(1);
     if (!id) return;
-    // loading recipe
     recipeView.renderSpinner();
+
+    resultsView.update(model.getSearchResultsPage());
+    // loading recipe
     await model.loadRecipe(id);
     // rendering recipe
     recipeView.render(model.state.recipe);
@@ -27,8 +29,8 @@ async function searchController() {
   try {
     const query = searchView.getQuery();
     if (!query) return;
-
     resultsView.renderSpinner();
+
     await model.loadSearchResults(query);
 
     resultsView.render(model.getSearchResultsPage());
