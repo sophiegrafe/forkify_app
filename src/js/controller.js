@@ -44,9 +44,15 @@ function paginationController(goToPage) {
   paginationView.render(model.state.search);
 }
 
+function servingsController(nrbServings) {
+  model.updateServings(nrbServings);
+  recipeView.update(model.state.recipe);
+}
+
 //initializing subscribers with IIFE
 (function () {
   recipeView.addHandlerRender(recipesController);
+  recipeView.addHandlerUpdateServings(servingsController);
   searchView.addHandlerSearch(searchController);
   paginationView.addHandlerClickBtn(paginationController);
 })();
